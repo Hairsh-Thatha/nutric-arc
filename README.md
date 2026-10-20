@@ -5,12 +5,18 @@ Nuxt 4 + Vue 3 nutrition tracker with PostgreSQL/Drizzle persistence, server-sid
 ## Run locally
 
 1. Install Node.js 20+ and PostgreSQL 15+.
-2. Copy `.env.example` to `.env` and set `DATABASE_URL` and `AI_API_KEY`; keep `AI_MODEL=gpt-4o-mini` unless you have selected another model enabled for your OpenAI API project.
+2. Copy `.env.example` to `.env` and set `DATABASE_URL`; set `AI_API_KEY` / `AI_MODEL` to enable food-image analysis.
 3. Install packages with `npm install`.
 4. Apply the initial database migration with `npm run db:migrate`.
-5. Start Nuxt with `npm run dev` (or `pnpm dev`). Restart the Nuxt server whenever you change `.env` values so the server runtime picks them up.
+5. Start Nuxt with `npm run dev`.
 
 The AI key and database credentials are only read by Nitro server code. Food estimates are returned as estimates and must be reviewed before saving.
+
+## Deploy on Vercel
+
+Configure `NUXT_DATABASE_URL` in the Vercel project's Environment Variables for every environment you use (Production, Preview, and Development). Set it to the connection URL for a hosted PostgreSQL database; a `localhost` URL only works on your own computer. Redeploy after changing environment variables. The server also accepts `DATABASE_URL` for compatibility with existing deployments.
+
+For migrations, run `pnpm run db:migrate` from a machine that can reach the hosted database, with `DATABASE_URL` set to that same hosted connection URL. Never put real credentials or API keys in `.env.example` or commit them to Git.
 
 ## Authentication
 
