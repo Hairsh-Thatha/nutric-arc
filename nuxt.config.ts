@@ -6,8 +6,8 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   modules: ['@nuxt/ui'],
   runtimeConfig: {
-    // Prefer Nuxt-prefixed deployment variables; keep the existing .env names working locally.
-    databaseUrl: process.env.NUXT_DATABASE_URL?.trim() || process.env.DATABASE_URL?.trim(),
+    // Read the database URL at runtime so a local .env value is never baked into a Vercel build.
+    databaseUrl: '',
     aiApiKey: process.env.NUXT_AI_API_KEY?.trim() || process.env.AI_API_KEY?.trim(),
     aiModel: process.env.NUXT_AI_MODEL?.trim() || process.env.AI_MODEL?.trim() || 'gpt-4o-mini',
     public: { appName: 'NutriArc' },
